@@ -28,7 +28,7 @@ def c_vel_solve(data, A, max_v, mask=None):
 
     norms = np.sum(np.abs(A)**2,axis=1)**(1./2)
     wraps = np.round(0.99 * norms * max_v / 2.0 / np.pi)
-
+    norms = np.ones_like(norms) # Data should not get weighted by encoding strength
     print('wraps = %s' % wraps)
 
     dshape = np.array(data.shape)
@@ -69,7 +69,7 @@ def c_vel_solve_weighted(data, A, max_v, weights=None, wnorm=2.0, weighting=True
 
     norms = np.sum(np.abs(A)**2,axis=1)**(1./2)
     wraps = np.round(0.99 * norms * max_v / 2.0 / np.pi)
-    norms /= norms.min()
+    norms = np.ones_like(norms) # Data should not get weighted by encoding strength
 
     # print('wraps = %s' % wraps)
     print('norms = %s' % norms)
@@ -143,7 +143,7 @@ def c_vel_reg(data, A, max_v, v_in=None, lam=1.0, weights=None, wnorm=2.0, weigh
 
     norms = np.sum(np.abs(A)**2,axis=1)**(1./2)
     wraps = np.round(0.99 * norms * max_v / 2.0 / np.pi)
-    norms /= norms.min()
+    norms = np.ones_like(norms) # Data should not get weighted by encoding strength
 
     # print('wraps = %s' % wraps)
     print('norms = %s' % norms)
